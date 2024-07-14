@@ -1,0 +1,180 @@
+@font-face {
+    font-family: Tektur;
+    src: url(fonts/TekturNarrow-ExtraBold.ttf);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #090e1c;
+    color: white;
+    font-family: Tektur;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.animated-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.animated-background .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.strip {
+    flex: 1;
+    display: flex;
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    background-origin: content-box;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.strip1, .strip3, .strip5, .strip7, .strip9, .strip11 {
+    background-color: #090e1c;
+    animation: moveRight 30s linear infinite;
+    background-image: url('images/lenta.png');
+}
+
+.strip2, .strip4, .strip6, .strip8, .strip10, .strip12 {
+    background-color: #72DFF;
+    animation: moveLeft 30s linear infinite;
+    background-image: url('images/lenta.png');
+}
+
+@keyframes moveRight {
+    0% { background-position: 0 0; }
+    100% { background-position: -1200px 0; }
+}
+
+@keyframes moveLeft {
+    0% { background-position: 0 0; }
+    100% { background-position: 1200px 0; }
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.container2 {
+    width: 80vw;
+    margin: 0 auto;
+    border-radius: 25px;
+    background: rgba(9, 14, 28, 0.6);
+}
+
+h1 {
+    font-size: 2.2em;
+    font-weight: bold;
+    padding: 10px 0 0;
+    color: #ff0eb5;
+}
+
+p {
+    font-size: 1.4em;
+    text-shadow: 1px 1px 1px #000;
+    margin: 10px 0;
+}
+
+.img_start {
+    width: 60%;
+    margin: 0 auto 20px;
+    padding: 5px 0 0;
+}
+
+.button-container {
+    margin: 20px 0;
+}
+
+.button-container button {
+    background-color: #8a2be2;
+    font-family: Tektur;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 5px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #6b1fa1;
+}
+
+.button-container button.selected {
+    background-color: #6b1fa1;
+}
+
+.grid-container {
+    position: absolute;
+    width: 0%;
+    padding: 5%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    margin: 20px auto;
+}
+
+.grid-container p {
+    color: rgba(0, 0, 0, 0);
+}
+
+.grid-item {
+    width: 100%;
+    padding-bottom: 100%; /* 1:1 Aspect Ratio */
+    position: relative;
+}
+
+.grid-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.star {
+    background-image: url('images/star_sprite.png');
+    background-size: cover;
+}
+
+.square1 {
+    background-image: url('images/square1.png');
+    background-size: cover;
+}
+
+.square2 {
+    background-image: url('images/square2.png');
+    background-size: cover;
+}
+
+.signal-button {
+    font-family: Tektur;
+    background-color: #8a2be2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.4em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.signal-button:hover {
+    background-color: #6b1fa1;
+}

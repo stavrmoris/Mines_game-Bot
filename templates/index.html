@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Устанавливает кодировку документа как UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Устанавливает масштабирование страницы для корректного отображения на мобильных устройствах -->
+    <title>RichFamily Mines</title>
+    <!-- Заголовок страницы -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Подключение файла стилей -->
+</head>
+<body>
+    <!-- Основной контейнер с анимацией фона -->
+    <div class="animated-background">
+        <div class="container">
+            <!-- Полосы анимации -->
+            <div class="strip strip1"></div>
+            <div class="strip strip2"></div>
+            <div class="strip strip3"></div>
+            <div class="strip strip4"></div>
+            <div class="strip strip5"></div>
+            <div class="strip strip6"></div>
+            <div class="strip strip7"></div>
+            <div class="strip strip8"></div>
+            <div class="strip strip9"></div>
+            <div class="strip strip10"></div>
+            <div class="strip strip11"></div>
+            <div class="strip strip12"></div>
+        </div>
+    </div>
+    <!-- Контейнер с основным содержимым -->
+    <div class="container" id="container2">
+        <div class="container2">
+            <h1>RichFamily Mines</h1>
+            <!-- Заголовок и описание -->
+            <p>Выберите кол-во мин:</p>
+            <div class="button-container">
+                <!-- Кнопки выбора количества мин -->
+                <button id="btn1" onclick="selectMines(1, 'btn1')">1</button>
+                <button id="btn3" onclick="selectMines(3, 'btn3')">3</button>
+                <button id="btn5" onclick="selectMines(5, 'btn5')">5</button>
+                <button id="btn7" onclick="selectMines(7, 'btn7')">7</button>
+            </div>
+        </div>
+        <!-- Изображение стартовой страницы -->
+        <div id="img_start">
+            <img src="{{ url_for('static', filename='images/mines_image.jpg') }}" alt="Mines Image" class="img_start" id="img_start">
+        </div>
+        <!-- Контейнер для игровой сетки -->
+        <div class="grid-container" id="grid-container">
+        </div>
+        <!-- Кнопка для получения сигнала -->
+        <button class="signal-button" onclick="getSignal()">Получить сигнал</button>
+    </div>
+
+    <script>
+        let selectedMines = 1;
+        let selectedButtonId = 'btn1';
+
+        // Функция для выбора количества мин
+        function selectMines(mines, buttonId) {
+            selectedMines = mines;
+            document.getElementById(selectedButtonId).classList.remove('selected');
+            selectedButtonId = buttonId;
+            document.getElementById(buttonId).classList.add('selected');
+            console.log(`Selected mines: ${mines}`);
+        }
+
+        // Функция для получения сигнала и генерации игровой сетки
+        function getSignal() {
+            const gridContainer = document.getElementById('grid-container');
+            const imgStart = document.getElementById('img_start');
+            gridContainer.innerHTML = '';  // Очистка контейнера
+            imgStart.innerHTML = '';  // Очистка контейнера
+
+            // Проверяем, что элемент найден
+            if (gridContainer) {
+                // Назначаем свойства
+                gridContainer.style.position = 'static';
+                gridContainer.style.background = '#000516';
+                gridContainer.style.width = '66%';
+                gridContainer.style.padding = '5%';
+                gridContainer.style.border = '5px solid #fff';
+                gridContainer.style.borderRadius = '5%';
+            } else {
+                console.error('Элемент с классом .grid-container не найден.');
+            }
+
+            // Генерация случайного количества звезд в зависимости от выбранных мин
+            const starCount = getRandomStarCount(selectedMines);
+            const totalCells = 25;
+            const starPositions = new Set();
+
+            // Генерация уникальных позиций для звезд
+            while (starPositions.size < starCount) {
+                starPositions.add(Math.floor(Math.random() * totalCells));
+            }
+
+            // Создание ячеек сетки и назначение классов для звезд и квадратов
+            for (let i = 0; i < totalCells; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('grid-item');
+
+                if (starPositions.has(i)) {
+                    cell.classList.add('star');
+                } else {
+                    cell.classList.add('square');
+                    cell.classList.add(`square${Math.floor(Math.random() * 2) + 1}`);  // Предполагая, что у нас есть 2 различных спрайта квадратов
+                }
+
+                gridContainer.appendChild(cell);
+            }
+        }
+
+        // Функция для получения случайного количества звезд в зависимости от выбранных мин
+        function getRandomStarCount(mines) {
+            switch (mines) {
+                case 1:
+                    return Math.floor(Math.random() * (12 - 3 + 1)) + 3;
+                case 3:
+                    return Math.floor(Math.random() * (10 - 3 + 1)) + 3;
+                case 5:
+                    return Math.floor(Math.random() * (8 - 3 + 1)) + 3;
+                case 7:
+                    return Math.floor(Math.random() * (7 - 3 + 1)) + 3;
+                default:
+                    return 3;
+            }
+        }
+    </script>
+</body>
+</html>
