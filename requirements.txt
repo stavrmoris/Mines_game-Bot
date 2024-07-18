@@ -1,0 +1,4 @@
+aiogram
+aiohttp
+sqlite3
+config-reader
