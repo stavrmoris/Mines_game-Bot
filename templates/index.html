@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Устанавливает кодировку документа как UTF-8 -->
+    <!-- Sets the document's character encoding to UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Устанавливает масштабирование страницы для корректного отображения на мобильных устройствах -->
+    <!-- Sets the page scaling for proper display on mobile devices -->
     <title>RichFamily Mines</title>
-    <!-- Заголовок страницы -->
+    <!-- Page title -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <!-- Подключение файла стилей -->
+    <!-- Linking the stylesheet file -->
 </head>
 <body>
-    <!-- Основной контейнер с анимацией фона -->
+    <!-- Main container with background animation -->
     <div class="animated-background">
         <div class="container">
-            <!-- Полосы анимации -->
+            <!-- Animation strips -->
             <div class="strip strip1"></div>
             <div class="strip strip2"></div>
             <div class="strip strip3"></div>
@@ -29,36 +29,36 @@
             <div class="strip strip12"></div>
         </div>
     </div>
-    <!-- Контейнер с основным содержимым -->
+    <!-- Container with main content -->
     <div class="container" id="container2">
         <div class="container2">
             <h1>RichFamily Mines</h1>
-            <!-- Заголовок и описание -->
-            <p>Выберите кол-во мин:</p>
+            <!-- Heading and description -->
+            <p>Select the number of mines:</p>
             <div class="button-container">
-                <!-- Кнопки выбора количества мин -->
+                <!-- Buttons for selecting the number of mines -->
                 <button id="btn1" onclick="selectMines(1, 'btn1')">1</button>
                 <button id="btn3" onclick="selectMines(3, 'btn3')">3</button>
                 <button id="btn5" onclick="selectMines(5, 'btn5')">5</button>
                 <button id="btn7" onclick="selectMines(7, 'btn7')">7</button>
             </div>
         </div>
-        <!-- Изображение стартовой страницы -->
+        <!-- Start page image -->
         <div id="img_start">
             <img src="{{ url_for('static', filename='images/mines_image.jpg') }}" alt="Mines Image" class="img_start" id="img_start">
         </div>
-        <!-- Контейнер для игровой сетки -->
+        <!-- Container for the game grid -->
         <div class="grid-container" id="grid-container">
         </div>
-        <!-- Кнопка для получения сигнала -->
-        <button class="signal-button" onclick="getSignal()">Получить сигнал</button>
+        <!-- Button to get the signal -->
+        <button class="signal-button" onclick="getSignal()">Get Signal</button>
     </div>
 
     <script>
         let selectedMines = 1;
         let selectedButtonId = 'btn1';
 
-        // Функция для выбора количества мин
+        // Function to select the number of mines
         function selectMines(mines, buttonId) {
             selectedMines = mines;
             document.getElementById(selectedButtonId).classList.remove('selected');
@@ -67,16 +67,16 @@
             console.log(`Selected mines: ${mines}`);
         }
 
-        // Функция для получения сигнала и генерации игровой сетки
+        // Function to get the signal and generate the game grid
         function getSignal() {
             const gridContainer = document.getElementById('grid-container');
             const imgStart = document.getElementById('img_start');
-            gridContainer.innerHTML = '';  // Очистка контейнера
-            imgStart.innerHTML = '';  // Очистка контейнера
+            gridContainer.innerHTML = '';  // Clear the container
+            imgStart.innerHTML = '';  // Clear the container
 
-            // Проверяем, что элемент найден
+            // Check if the element is found
             if (gridContainer) {
-                // Назначаем свойства
+                // Assign properties
                 gridContainer.style.position = 'static';
                 gridContainer.style.background = '#000516';
                 gridContainer.style.width = '66%';
@@ -84,20 +84,20 @@
                 gridContainer.style.border = '5px solid #fff';
                 gridContainer.style.borderRadius = '5%';
             } else {
-                console.error('Элемент с классом .grid-container не найден.');
+                console.error('Element with class .grid-container not found.');
             }
 
-            // Генерация случайного количества звезд в зависимости от выбранных мин
+            // Generate a random number of stars based on the selected mines
             const starCount = getRandomStarCount(selectedMines);
             const totalCells = 25;
             const starPositions = new Set();
 
-            // Генерация уникальных позиций для звезд
+            // Generate unique positions for the stars
             while (starPositions.size < starCount) {
                 starPositions.add(Math.floor(Math.random() * totalCells));
             }
 
-            // Создание ячеек сетки и назначение классов для звезд и квадратов
+            // Create grid cells and assign classes for stars and squares
             for (let i = 0; i < totalCells; i++) {
                 const cell = document.createElement('div');
                 cell.classList.add('grid-item');
@@ -106,14 +106,14 @@
                     cell.classList.add('star');
                 } else {
                     cell.classList.add('square');
-                    cell.classList.add(`square${Math.floor(Math.random() * 2) + 1}`);  // Предполагая, что у нас есть 2 различных спрайта квадратов
+                    cell.classList.add(`square${Math.floor(Math.random() * 2) + 1}`);  // Assuming we have 2 different square sprites
                 }
 
                 gridContainer.appendChild(cell);
             }
         }
 
-        // Функция для получения случайного количества звезд в зависимости от выбранных мин
+        // Function to get a random number of stars based on the selected mines
         function getRandomStarCount(mines) {
             switch (mines) {
                 case 1:
