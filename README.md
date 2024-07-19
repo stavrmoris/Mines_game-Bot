@@ -2,6 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
 ![Telegram](https://img.shields.io/badge/Telegram-Bot-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-3.x-red.svg)
 ![python-telegram-bot](https://img.shields.io/badge/python--telegram--bot-20.x-green.svg)
 ![Stars](https://img.shields.io/github/stars/stavrmoris/Mines_game-Bot)
 
