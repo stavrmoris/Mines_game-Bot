@@ -8,7 +8,7 @@
 
 Mines Game Bot is a Telegram bot that provides a fun mines game and signals for users.
 
-[Read in Russian](README_RU.md)
+[Читать на русском](README_RU.md)
 
 ## 📚 Table of Contents
 
